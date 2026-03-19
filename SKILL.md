@@ -10,6 +10,21 @@ Create content that ranks. This skill guides you through the entire SEO content 
 - **SEO-Optimized Drafts**: Write with proper heading hierarchy, internal links, and meta tags
 - **Content Refresh**: Update old posts to regain lost rankings
 
+## SMF Works Context
+
+- **Domain:** smfworks.com
+- **Primary services:** AI automation consulting, lead gen systems, workflow optimization
+- **Content pillars:**
+  1. AI tools for small business
+  2. Automation workflows (Zapier, Make, n8n, OpenClaw)
+  3. Lead generation systems
+  4. No-code/low-code solutions
+- **Target audience:** Small business owners, entrepreneurs, solopreneurs who need AI automation but don't have technical teams
+- **Audience pain points:** Manual processes eating time, can't afford enterprise tools, confused by AI hype, don't know where to start with automation
+- **Brand voice:** Direct, practical, skip the jargon, show don't tell, no corporate fluff
+- **Key competitors to monitor:** [Add competitors]
+- **Existing high-performing content:** [Add top posts for internal linking]
+
 ## Quick Start
 
 ### 1. New Article from Keyword
@@ -39,28 +54,46 @@ Output: 12 article ideas with target keywords and priority scores"
 
 ## The SEO Content Workflow
 
-### Phase 1: Keyword Intelligence
+### Phase 1: Keyword Intelligence (Agent Actions)
 
-Input: Seed topic or competitor URL
-Output: Prioritized keyword list with difficulty scores
+**Input:** Seed topic or competitor URL
+**Output:** Prioritized keyword list with difficulty scores
 
-Key metrics to consider:
+**Agent Steps:**
+1. Run `web_search` with seed topic to find related queries
+2. Run `web_search` with "[topic] vs" and "[topic] how to" to find long-tail variants
+3. Run `web_fetch` on Google's "People Also Ask" results
+4. Score keywords by: intent match × likely volume × competition signal
+5. Output ranked list with reasoning for top 5 picks
 
-- **Search Volume**: Monthly searches (higher ≠ always better)
-- **Keyword Difficulty**: Competition level (start with <30 for new sites)
-- **Search Intent**: Informational, navigational, transactional, commercial
-- **CPC**: Cost-per-click indicates commercial value
-- **Trend**: Seasonal or growing interest?
+**Key metrics to consider:**
 
-### Phase 2: SERP Analysis
+- **Search Volume:** Monthly searches (higher ≠ always better)
+- **Keyword Difficulty:** Competition level (start with <30 for new sites)
+- **Search Intent:** Informational, navigational, transactional, commercial
+- **CPC:** Cost-per-click indicates commercial value
+- **Trend:** Seasonal or growing interest?
+
+### Phase 2: SERP Analysis (Agent Actions)
 
 Before writing, analyze the top 10 results:
 
-- **Content Type**: Blog post? Product page? Listicle? Guide?
-- **Content Depth**: Word count, sections covered, detail level
-- **Content Gaps**: What's missing that you can add?
-- **Common Elements**: Do all top results have videos? Tables? FAQs?
-- **Domain Authority**: Are you competing with Wikipedia or small blogs?
+**Agent Steps:**
+1. `web_search` the target keyword
+2. For each of the top 5 results:
+   - `web_fetch` the URL
+   - Extract: title, H1, H2s, approximate word count
+   - Note: content type (listicle, guide, comparison)
+3. Identify content gaps (topics top results miss)
+4. Output: SERP analysis report with recommended angle
+
+**What to analyze:**
+
+- **Content Type:** Blog post? Product page? Listicle? Guide?
+- **Content Depth:** Word count, sections covered, detail level
+- **Content Gaps:** What's missing that you can add?
+- **Common Elements:** Do all top results have videos? Tables? FAQs?
+- **Domain Authority:** Are you competing with Wikipedia or small blogs?
 
 ### Phase 3: Outline Creation
 
@@ -80,21 +113,28 @@ H1: Target Keyword (exact or close variant)
  H2: Conclusion (CTA + summary)
 ```
 
-### Phase 4: Content Writing
+### Phase 4: Content Writing with E-E-A-T
+
+**E-E-A-T Requirements (Critical for 2026):**
+
+- **Experience:** Demonstrate firsthand knowledge. Use "we've implemented this for clients" or "in our testing..."
+- **Expertise:** Cite authoritative sources, include expert quotes, reference industry data
+- **Authoritativeness:** Link to SMF Works' existing content, mention credentials where relevant
+- **Trustworthiness:** Include author bio, cite sources, be transparent about limitations
 
 **On-Page SEO Checklist:**
 
-- [ ] Title tag: 50-60 chars, includes keyword
-- [ ] Meta description: 150-160 chars, compelling CTA
+- [ ] Title tag: 50-60 chars, includes keyword near front
+- [ ] Meta description: 150-160 chars, compelling CTA, includes keyword
 - [ ] URL slug: Short, keyword-rich, no stop words
-- [ ] H1: One per page, includes keyword
+- [ ] H1: One per page, includes keyword naturally
 - [ ] H2-H6: Logical hierarchy, keywords where natural
-- [ ] Internal links: 2-5 to relevant pages
+- [ ] Internal links: 2-5 to relevant SMF Works pages
 - [ ] External links: 1-3 to authoritative sources
 - [ ] Images: Descriptive filenames, alt text, compressed
 - [ ] Schema markup: Article, FAQ, HowTo where applicable
 - [ ] Mobile-friendly: Responsive design
-- [ ] Page speed: <3s load time
+- [ ] Core Web Vitals: LCP < 2.5s, INP < 200ms, CLS < 0.1
 
 **Content Quality Standards:**
 
@@ -103,6 +143,15 @@ H1: Target Keyword (exact or close variant)
 - Actionable takeaways in every section
 - Scannable with bullet points and short paragraphs
 - Multimedia: images, videos, infographics
+- **People-first:** Write for humans, not search engines (Google's Helpful Content System)
+
+**Semantic Coverage:**
+
+Instead of "keyword density," cover related subtopics and questions:
+- Google's "People Also Ask" questions
+- Related searches at bottom of SERP
+- Subtopics from top-ranking content
+- Industry terminology and concepts
 
 ### Phase 5: Optimization & Publishing
 
@@ -110,14 +159,13 @@ H1: Target Keyword (exact or close variant)
 
 - [ ] Grammar/spelling check
 - [ ] Readability score (aim for 8th grade)
-- [ ] Keyword density: 1-2% (avoid stuffing)
-- [ ] LSI keywords: Related terms naturally included
-- [ ] Featured snippet optimization: Direct answers, tables, lists
+- [ ] Semantic coverage: Related subtopics naturally included
+- [ ] Featured snippet optimization: Answer in first paragraph (40-60 words), use definition-style formatting
 - [ ] Social sharing: Open Graph tags, Twitter cards
+- [ ] E-E-A-T check: Author bio, citations, unique expertise demonstrated
 
 **Post-publish:**
 
-- Submit to Google Search Console
 - Share on social media
 - Build internal links from existing content
 - Monitor rankings after 2-4 weeks
@@ -136,8 +184,48 @@ Refresh process:
 2. Update statistics and examples
 3. Add new sections based on content gaps
 4. Improve internal linking
-5. Update publish date (if significant changes)
-6. Resubmit to Google Search Console
+5. **Only update publish date if significant changes made** (Google penalizes date-only updates)
+6. Resubmit to Google Search Console (manual user step)
+
+## Technical SEO Basics
+
+**Core Web Vitals:**
+- **LCP (Largest Contentful Paint):** < 2.5 seconds
+- **INP (Interaction to Next Paint):** < 200 milliseconds
+- **CLS (Cumulative Layout Shift):** < 0.1
+
+**Crawl & Index:**
+- XML sitemap submitted to Google Search Console
+- Robots.txt configured properly
+- Canonical URLs set for duplicate content
+- Noindex on thin/duplicate pages
+
+**Structured Data:**
+- Article schema for blog posts
+- FAQ schema for FAQ sections
+- HowTo schema for tutorials
+- Organization schema for SMF Works
+
+## Link Building Guidance
+
+**Internal Linking:**
+- Link to 2-5 relevant existing SMF Works articles
+- Use descriptive anchor text (not "click here")
+- Prioritize high-authority pages
+
+**External Link Building (Manual/User-driven):**
+- Guest posting on industry blogs
+- Digital PR (original research, data studies)
+- Broken link building
+- Resource page outreach
+
+## Success Metrics
+
+- **Rankings:** Target top 10 for primary keyword within 8 weeks
+- **Traffic:** Minimum 100 organic sessions/month per article after 3 months
+- **CTR:** Above 3% average from search results
+- **Engagement:** Average time on page > 2 minutes
+- **Conversions:** At least 1 conversion action per 500 sessions
 
 ## Tools Integration
 
@@ -145,17 +233,17 @@ This skill works with:
 - `web_search` — for keyword and competitor research
 - `web_fetch` — for SERP analysis
 - `summarize` — for competitor content analysis
-- `sessions_spawn` — for drafting with writing models
+- `sessions_spawn` — for drafting with writing models (use for long-form content generation)
 
-## SMF Works Customization
+## AI Content Considerations
 
-This skill is tailored for SMF Works content strategy:
-- Focus on AI automation and small business topics
-- Tone: Direct, no fluff, practical
-- Target audience: Small business owners, entrepreneurs
-- Content types: How-to guides, tool comparisons, case studies
+With Google's stance on AI-generated content:
+- Always have human review before publishing
+- Add unique expertise, personal anecdotes, original research
+- Avoid generic AI patterns (overly formal tone, repetitive structure)
+- Ensure content demonstrates E-E-A-T
+- Use AI as a starting point, not the final product
 
 ---
 
-*Forked from SEO Content Engine by kambrosgroup on ClawHub*
-*Rebranded for SMF Works*
+*SMF Works SEO Content Engine — Optimized for OpenClaw*
