@@ -1,6 +1,6 @@
-# SMF SEO — SEO Content Engine
+# SMF SEO+GEO — Content Optimization Engine
 
-Create content that ranks. This skill guides you through the entire SEO content workflow — from keyword research to published draft — with data-driven decisions at every step.
+Create content that ranks in both traditional search AND AI-powered answers. This skill guides you through the complete SEO+GEO content workflow — from keyword research to published draft — with data-driven decisions at every step.
 
 ## What It Does
 
@@ -8,7 +8,8 @@ Create content that ranks. This skill guides you through the entire SEO content 
 - **SERP Analysis**: Understand what Google wants for your target keyword
 - **Content Outlines**: Structure articles that satisfy search intent
 - **SEO-Optimized Drafts**: Write with proper heading hierarchy, internal links, and meta tags
-- **Content Refresh**: Update old posts to regain lost rankings
+- **GEO Optimization**: Get content cited in ChatGPT, Perplexity, Gemini, and Google AI Overviews
+- **Content Refresh**: Update old posts to regain lost rankings in both traditional and AI search
 
 ## SMF Works Context
 
@@ -192,6 +193,138 @@ Refresh process:
 4. Improve internal linking
 5. **Only update publish date if significant changes made** (Google penalizes date-only updates)
 6. Resubmit to Google Search Console (manual user step)
+
+## GEO: Generative Engine Optimization
+
+GEO optimizes content to be **cited** in AI-generated answers — ChatGPT, Perplexity, Gemini, Google AI Overviews. Unlike SEO (where you want clicks), GEO aims for zero-click visibility inside AI responses.
+
+**Key insight:** GEO and SEO are complementary, not competing. The same article can rank in Google AND be cited by ChatGPT. Optimize for both.
+
+### Why GEO Matters Now
+
+- Zero-click searches grew from 56% to 69% since Google AI Overviews launched
+- ~93% of AI Mode searches end without any click
+- Your content can be the primary source for an AI answer without you receiving a single visit
+- Being cited by name in AI answers = brand authority even without traffic
+
+### GEO vs SEO
+
+| Factor | SEO | GEO |
+|--------|-----|-----|
+| **Goal** | Rank in search results | Be cited in AI answers |
+| **Target** | Google, Bing | ChatGPT, Perplexity, Gemini, AI Overviews |
+| **Success metric** | Position ranking, CTR | Citation frequency, brand mentions |
+| **Content focus** | Keywords, backlinks, meta tags | Authority signals, statistics, clear answers |
+| **Traffic model** | Click-through to your site | Zero-click brand exposure |
+
+### GEO Optimization Techniques
+
+Apply these in addition to standard SEO:
+
+#### 1. Authoritative Citations
+- **Name authoritative sources** — AI models favor content that cites credible sources
+- **Include statistics with attribution** — "According to [Source], 73% of businesses..."
+- **Reference industry leaders** — name companies, tools, experts in your space
+- **Link to authoritative sources** — don't just name them, link to them
+
+#### 2. Statistical Evidence
+- AI models favor content with **quantifiable data points**
+- Include: percentages, rankings, dollar amounts, timeframes
+- Format as: "X% of [audience] [does something]" — easily extractable
+- Add comparison tables with specific numbers
+
+#### 3. Definitive Answers
+- Answer questions **directly in the first 50-100 words**
+- Use clear, declarative statements:
+  - ❌ "Many businesses struggle with..."
+  - ✅ "75% of small businesses fail within 5 years due to poor lead management."
+- AI extracts direct answers — don't bury the point in caveats
+
+#### 4. Structured Data & Schema
+- **FAQ schema** — AI pulls answers from FAQ sections frequently
+- **HowTo schema** — for tutorials and processes
+- **Article schema** — helps AI categorize and cite properly
+- **Organization schema** — establishes brand authority
+
+#### 5. Semantic Content Structuring
+- **Use clear question headers** — "What is X?", "How does Y work?"
+- **Numbered lists for comparisons** — AI can extract and present cleanly
+- **Comparison tables** — markdown/HTML tables are easily parsed
+- **Bullet points for key takeaways** — scannable structure helps AI identify main points
+
+#### 6. Natural Language Q&A
+- Include "People Also Ask" questions verbatim
+- Answer follow-up questions in the same section
+- Cover related subtopics (semantic coverage also helps traditional SEO)
+
+#### 7. Brand Mentions & Social Proof
+- Name your brand in context of expertise: "SMF Works has implemented 50+ automation workflows..."
+- Include recognizable client outcomes: "One client cut response time by 80% using..."
+- Author bio with credentials helps establish authority
+
+#### 8. Source Credibility Signals
+- Include publication date (AI prefers fresh content)
+- Author byline with credentials
+- Citation list at bottom of article
+- Links to original research/data
+
+### GEO Content Checklist
+
+Add to your standard SEO checklist:
+
+- [ ] Answer the main question in the first 50-100 words (directly, no preamble)
+- [ ] Include 3+ statistical data points with source attribution
+- [ ] Add FAQ section with schema markup (5+ questions)
+- [ ] Include comparison table with specific numbers
+- [ ] Cite authoritative sources (industry reports, research papers, recognized brands)
+- [ ] Add author bio with credentials
+- [ ] Include publication date prominently
+- [ ] Use clear H2/H3 structure with question-style headers
+- [ ] Add "How to verify" or "What the data shows" sections
+- [ ] Reference your own brand in context of expertise (when legitimate)
+
+### Testing GEO Performance
+
+Manual audit:
+1. Search your target keyword in ChatGPT (with web browsing) and Perplexity
+2. Check if your content or competitors are cited
+3. Note which content format (table, bullet, paragraph) is being cited
+4. Look for gaps where your content could provide better answers
+
+**Note:** There's no Google Search Console for GEO — citation tracking requires manual checking or third-party tools.
+
+### GEO Content Format
+
+When drafting, signal GEO intent:
+
+```
+Article: [Title]
+Target keyword: [keyword]
+SEO goal: [traditional ranking target]
+GEO goal: [be cited for question: "what is X?" / "how to X?" / "best X for Y"]
+
+Include for GEO:
+- Opening: Direct answer (40-60 words)
+- Statistics: [3+ data points with sources]
+- FAQ: [5+ questions from PAA]
+- Comparison table: [with specific metrics]
+- Author credentials: [relevant experience]
+```
+
+### Multi-Platform GEO
+
+Different AI platforms cite different sources:
+
+| Platform | Primary Source Types |
+|----------|---------------------|
+| **ChatGPT** | Web content, Reddit, forums, news |
+| **Perplexity** | Academic, news, detailed articles |
+| **Gemini/Google AI** | Google-indexed content, SGE sources |
+| **Claude** | Broader training data, less real-time |
+
+**Strategy:** Create platform-agnostic content that satisfies all — good structure, authoritative sources, and direct answers work everywhere.
+
+---
 
 ## Technical SEO Basics
 

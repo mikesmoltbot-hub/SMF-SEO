@@ -1,16 +1,16 @@
-# SMF SEO
+# SMF SEO+GEO
 
 [![SMF Works](https://img.shields.io/badge/SMF-Works-blue)](https://smfworks.com)
 [![OpenClaw](https://img.shields.io/badge/Built%20for-OpenClaw-green)](https://github.com/openclaw/openclaw)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-**AI-Powered SEO Content Engine**
+**AI-Powered SEO + GEO Content Engine**
 
-Create content that ranks. From keyword research to published drafts, SMF SEO guides you through the entire SEO workflow with data-driven decisions at every step.
+Create content that ranks. From keyword research to published drafts, SMF SEO+GEO guides you through the entire SEO workflow with data-driven decisions at every step.
 
 ## Overview
 
-SMF SEO is an OpenClaw skill that automates and guides the complete SEO content creation process. It combines AI-powered research with proven SEO strategies to help you create articles that rank on Google.
+SMF SEO+GEO is an OpenClaw skill that automates and guides the complete SEO content creation process. It combines AI-powered research with proven SEO strategies to help you create articles that rank on Google AND get cited by AI.
 
 ### What Makes It Different
 
@@ -51,17 +51,24 @@ SMF SEO is an OpenClaw skill that automates and guides the complete SEO content 
 - Improve internal linking
 - Regain lost rankings
 
+### 🤖 GEO Optimization
+- Optimize for ChatGPT, Perplexity, Gemini citations
+- Authoritative citations and statistical evidence
+- FAQ schema and structured data
+- Direct answers for zero-click searches
+
+
 ### 📅 Content Strategy
 - Build topical authority with pillar + cluster content
 - 3-month content calendars
 - Competitor gap analysis
 - Priority scoring system
 
-## The SEO Content Workflow
+## The SEO+GEO Content Workflow
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    SEO Content Workflow                      │
+│                 SEO + GEO Content Workflow                    │
 └─────────────────────────────────────────────────────────────┘
 
   ┌──────────────┐
@@ -77,26 +84,32 @@ SMF SEO is an OpenClaw skill that automates and guides the complete SEO content 
          │
          ▼
   ┌──────────────┐
-  │ 3. Outline   │──▶ Structure with H1-H6 hierarchy
-  │ Creation     │     Plan internal links
+  │ 3. GEO Fit    │──▶ Identify AI citation opportunities
+  │ Assessment   │     (Which questions will AI ask?)
   └──────────────┘
          │
          ▼
   ┌──────────────┐
-  │ 4. Content   │──▶ Write with E-E-A-T principles
-  │ Writing      │     Add unique expertise
+  │ 4. Outline   │──▶ Structure with H1-H6 hierarchy
+  │ Creation     │     + GEO signals (stats, FAQs, tables)
   └──────────────┘
          │
          ▼
   ┌──────────────┐
-  │ 5. Optimize  │──▶ On-page SEO, schema markup
-  │ & Publish    │     Social sharing tags
+  │ 5. Content   │──▶ Write with E-E-A-T + GEO principles
+  │ Writing      │     Add unique expertise + statistics
   └──────────────┘
          │
          ▼
   ┌──────────────┐
-  │ 6. Monitor   │──▶ Track rankings & traffic
-  │ & Refresh    │     Update as needed
+  │ 6. Optimize  │──▶ On-page SEO, schema markup, FAQ schema
+  │ & Publish    │     GEO meta tags, social sharing
+  └──────────────┘
+         │
+         ▼
+  ┌──────────────┐
+  │ 7. Monitor   │──▶ Track rankings + AI citations
+  │ & Refresh    │     Update for both Google + AI
   └──────────────┘
 ```
 
@@ -111,7 +124,7 @@ SMF SEO is an OpenClaw skill that automates and guides the complete SEO content 
 
 ```bash
 # Clone to OpenClaw skills directory
-git clone https://github.com/mikesmoltbot-hub/SMF-SEO.git \
+git clone https://github.com/smfworks/SMF-SEO.git \
   ~/.openclaw/skills/smf-seo
 
 # Verify installation
@@ -124,7 +137,7 @@ ls ~/.openclaw/skills/smf-seo/
 Once installed, the skill is automatically available in OpenClaw. Use it by referencing SEO content tasks:
 
 ```
-"SMF SEO: Create an SEO-optimized article targeting the keyword 'best AI automation tools for small business'"
+"SMF SEO+GEO: Create an SEO-optimized article targeting the keyword 'best AI automation tools for small business'"
 ```
 
 ## Quick Start Examples
@@ -140,7 +153,7 @@ Tone: Professional but approachable
 Include: Comparison table, pricing section, FAQ"
 ```
 
-**SMF SEO will:**
+**SMF SEO+GEO will:**
 1. Research the keyword and competition
 2. Analyze top-ranking content
 3. Create an optimized outline
@@ -159,7 +172,7 @@ Current issues: Dropped from position 5 to 15, outdated pricing
 Add: Current data, new tools released in 2026, better internal links"
 ```
 
-**SMF SEO will:**
+**SMF SEO+GEO will:**
 1. Analyze current SERP
 2. Identify what's changed
 3. Recommend specific updates
@@ -181,7 +194,7 @@ Goal: Generate leads through organic search
 Output: 12 article ideas with keywords and priority scores"
 ```
 
-**SMF SEO will:**
+**SMF SEO+GEO will:**
 1. Research each content pillar
 2. Find keyword opportunities
 3. Analyze competition gaps
@@ -417,7 +430,7 @@ With Google's stance on AI-generated content:
 
 ## Tools Integration
 
-SMF SEO works with OpenClaw tools:
+SMF SEO+GEO works with OpenClaw tools:
 
 - `web_search` — Keyword and competitor research
 - `web_fetch` — SERP content analysis
@@ -460,7 +473,7 @@ SMF SEO works with OpenClaw tools:
 
 ## Support
 
-- **Issues:** [GitHub Issues](https://github.com/mikesmoltbot-hub/SMF-SEO/issues)
+- **Issues:** [GitHub Issues](https://github.com/smfworks/SMF-SEO/issues)
 - **Email:** michael@smfworks.com
 - **Website:** [smfworks.com](https://smfworks.com)
 - **OpenClaw Docs:** [docs.openclaw.ai](https://docs.openclaw.ai)
