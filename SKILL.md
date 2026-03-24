@@ -11,49 +11,119 @@ Create content that ranks in both traditional search AND AI-powered answers. Thi
 - **GEO Optimization**: Get content cited in ChatGPT, Perplexity, Gemini, and Google AI Overviews
 - **Content Refresh**: Update old posts to regain lost rankings in both traditional and AI search
 
-## SMF Works Context
+---
 
-- **Domain:** smfworks.com
-- **Primary services:** AI automation consulting, lead gen systems, workflow optimization
-- **Content pillars:**
-  1. AI tools for small business
-  2. Automation workflows (Zapier, Make, n8n, OpenClaw)
-  3. Lead generation systems
-  4. No-code/low-code solutions
-- **Target audience:** Small business owners, entrepreneurs, solopreneurs who need AI automation but don't have technical teams
-- **Audience pain points:** Manual processes eating time, can't afford enterprise tools, confused by AI hype, don't know where to start with automation
-- **Brand voice:** Direct, practical, skip the jargon, show don't tell, no corporate fluff
-- **Key competitors to monitor:** [Add competitors]
-- **Existing high-performing content:** [Add top posts for internal linking]
+## First-Time Setup
 
-## Quick Start
+**On first use, this skill will launch an interactive onboarding wizard.** The AI will ask you 8 questions to customize the skill for your organization. This takes about 2-3 minutes.
+
+**Questions will cover:**
+1. Your website domain
+2. Primary services/products
+3. Content pillars (main topic areas)
+4. Target audience description
+5. Key competitors to monitor
+6. Existing high-performing content (for internal linking)
+7. Brand voice preferences
+8. Your name/credentials (for author bylines)
+
+**Your answers are saved locally** in `~/.smf/skills/smf-seo-gee/config.json` — never sent anywhere.
+
+**To re-run setup:** Say "reconfigure SMF SEO" or run `smfw reconfigure smf-seo-gee`
+
+---
+
+## Onboarding Wizard Dialogue
+
+When the user first invokes this skill, conduct this exact dialogue to configure it. Ask one question at a time. After all questions, save the config and confirm.
+
+**Wizard Script:**
+
+```
+Welcome to SMF SEO+GEO! I'll configure this skill for your organization.
+
+First, I need to ask you 8 questions. Your answers are saved locally and never sent anywhere.
+
+Let's start:
+
+1. What is your website domain? (e.g., example.com)
+   → Store in config.organization.domain
+
+2. What is your organization/company name?
+   → Store in config.organization.name
+
+3. What are your primary services or products? (Tell me what you offer)
+   → Store in config.organization.primary_services (newline-separated list)
+
+4. What are your main content topic areas? (Your blog categories or expertise areas)
+   → Store in config.organization.content_pillars (newline-separated list)
+
+5. Who is your target audience? (Describe your ideal customer or reader)
+   → Store in config.organization.target_audience
+
+6. What are your audience's main pain points? (What problems do they face?)
+   → Store in config.organization.audience_pain_points (newline-separated list)
+
+7. Who are your main competitors? (Websites you'd like to outrank)
+   → Store in config.organization.key_competitors (newline-separated list)
+
+8. Do you have existing high-performing content? (Pages that rank well already)
+   → Store in config.organization.existing_high_performing_content (URLs or titles, newline-separated)
+
+Now brand details:
+
+9. How would you describe your brand voice? (e.g., 'Direct and practical' or 'Friendly and conversational')
+   → Store in config.brand.voice
+
+10. What name should appear as the author on articles?
+    → Store in config.brand.author_name
+
+11. What credentials or bio should appear with articles?
+    → Store in config.brand.author_credentials
+
+12. Default target word count for articles? (Press Enter for 2000)
+    → Store in config.preferences.default_word_count (number)
+
+That's it! Saving your configuration...
+✅ Setup complete! Your SEO+GEO skill is ready.
+```
+
+**After saving, run:**
+```bash
+python3 ~/.smf/skills/smf-seo-gee/scripts/config_manager.py complete
+```
+
+**Re-run trigger:** If user says "reconfigure SEO" or "update SEO settings", restart the wizard from question 1.
+
+---
+
+## Quick Start (After Setup)
 
 ### 1. New Article from Keyword
 
-"Create an SEO-optimized article targeting the keyword: 'best project management software for small teams'
+"Create an SEO-optimized article targeting the keyword: '[your keyword]'
 
-Target word count: 2000
-Tone: Professional but approachable
-Include: Comparison table, pricing section, FAQ"
+Target word count: [number]
+Tone: [your brand voice]
+Include: [comparison table / FAQ / pricing section / etc.]"
 
 ### 2. Content Refresh
 
-"Refresh this old blog post for better SEO performance:
+"Refresh this old blog post for better SEO + GEO performance:
 [paste existing content]
 
 Target keyword: [keyword]
-Current issues: [dropped rankings, outdated info, etc.]
-Add: Current data, new sections, better internal links"
+Current issues: [dropped rankings / outdated info / etc.]"
 
 ### 3. Content Strategy
 
-"Build a 3-month content calendar for a [industry] business targeting [audience].
-
+"Build a 3-month content calendar for [industry] targeting [audience].
 Focus topics: [topic 1], [topic 2], [topic 3]
-Goal: [leads/brand awareness/authority]
-Output: 12 article ideas with target keywords and priority scores"
+Goal: [leads / brand awareness / authority]"
 
-## The SEO Content Workflow
+---
+
+## The SEO+GEO Content Workflow
 
 ### Phase 1: Keyword Intelligence (Agent Actions)
 
@@ -96,9 +166,26 @@ Before writing, analyze the top 10 results:
 - **Common Elements:** Do all top results have videos? Tables? FAQs?
 - **Domain Authority:** Are you competing with Wikipedia or small blogs?
 
-### Phase 3: Outline Creation
+### Phase 3: GEO Fit Assessment (Agent Actions)
 
-Structure for SEO success:
+**New for GEO:** Identify which questions AI engines will ask and how to structure content for citation.
+
+**Agent Steps:**
+1. `web_search` the keyword and identify "People Also Ask" questions
+2. Search in ChatGPT/Perplexity (if available) for the same query
+3. Identify: What direct answers is AI providing? What sources does it cite?
+4. Note: Which format is being cited — paragraph, table, bullet list, FAQ?
+5. Determine: Where can your content be THE cited source?
+
+**GEO Opportunities to Look For:**
+- Questions with direct factual answers (statistics, definitions)
+- Comparison queries where AI summarizes options
+- "How to" queries where AI provides step-by-step summaries
+- FAQ sections where AI pulls individual Q&A pairs
+
+### Phase 4: Outline Creation
+
+Structure for SEO + GEO success:
 
 ```
 H1: Target Keyword (exact or close variant)
@@ -110,24 +197,39 @@ H1: Target Keyword (exact or close variant)
    H3: Option 2
    H3: Option 3
  H2: How to Choose (buying guide section)
- H2: [Topic] FAQ
+ H2: [Topic] FAQ (Schema: FAQ)
  H2: Conclusion (CTA + summary)
 ```
 
-### Phase 4: Content Writing with E-E-A-T
+**GEO-Enhanced Outline Elements:**
+- Add statistical callouts: "X% of businesses..." format
+- Include comparison tables in the outline
+- Plan FAQ section with direct-answer questions
+- Mark sections where AI could cite specific data points
+
+### Phase 5: Content Writing with E-E-A-T + GEO
 
 **E-E-A-T Requirements (Critical for 2026):**
 
 - **Experience:** Demonstrate firsthand knowledge. Use "we've implemented this for clients" or "in our testing..."
 - **Expertise:** Cite authoritative sources, include expert quotes, reference industry data
-- **Authoritativeness:** Link to SMF Works' existing content, mention credentials where relevant
+- **Authoritativeness:** Link to your existing content, mention credentials where relevant
 - **Trustworthiness:** Include author bio, cite sources, be transparent about limitations
 
-**SMF Works E-E-A-T Assets to Leverage:**
-- Client implementations: "We've set up 50+ automation workflows..."
-- Real data: "In our testing of 10 AI tools..."
-- Process screenshots: "Here's our actual n8n workflow..."
-- Industry expertise: "Having worked with 100+ small businesses..."
+**GEO Requirements:**
+
+- **Direct answers first:** Answer the main question in the first 50-100 words
+- **Statistics with attribution:** "According to [Source], X%..." format
+- **Comparison tables:** For side-by-side comparisons (AI extracts these easily)
+- **FAQ with schema:** Use question-style headers with direct answers
+- **Brand mentions where relevant:** "We've helped 50+ clients..."
+
+**Config-driven content:**
+The AI reads `~/.smf/skills/smf-seo-gee/config.json` for organization-specific details:
+- Domain, services, audience — used to personalize content
+- Competitors — used for comparison angles
+- Brand voice — used to calibrate tone
+- Author credentials — used for bylines
 
 **On-Page SEO Checklist:**
 
@@ -136,63 +238,64 @@ H1: Target Keyword (exact or close variant)
 - [ ] URL slug: Short, keyword-rich, no stop words
 - [ ] H1: One per page, includes keyword naturally
 - [ ] H2-H6: Logical hierarchy, keywords where natural
-- [ ] Internal links: 2-5 to relevant SMF Works pages
+- [ ] Internal links: 2-5 to relevant existing pages
 - [ ] External links: 1-3 to authoritative sources
 - [ ] Images: Descriptive filenames, alt text, compressed
 - [ ] Schema markup: Article, FAQ, HowTo where applicable
 - [ ] Mobile-friendly: Responsive design
 - [ ] Core Web Vitals: LCP < 2.5s, INP < 200ms, CLS < 0.1
 
-**Content Quality Standards:**
+**GEO Content Checklist:**
 
-- Original insights, not just rehashed content
-- Expert quotes or data where possible
-- Actionable takeaways in every section
-- Scannable with bullet points and short paragraphs
-- Multimedia: images, videos, infographics
-- **People-first:** Write for humans, not search engines (Google's Helpful Content System)
+- [ ] Answer main question directly in first 50-100 words
+- [ ] Include 3+ statistical data points with source attribution
+- [ ] Add FAQ section with schema markup (5+ questions from PAA)
+- [ ] Include comparison table with specific numbers
+- [ ] Cite authoritative sources (industry reports, research papers)
+- [ ] Add author bio with credentials
+- [ ] Include publication date prominently
+- [ ] Use clear H2/H3 structure with question-style headers
+- [ ] Add "What the data shows" sections with specific numbers
 
-**Semantic Coverage:**
-
-Instead of "keyword density," cover related subtopics and questions:
-- Google's "People Also Ask" questions
-- Related searches at bottom of SERP
-- Subtopics from top-ranking content
-- Industry terminology and concepts
-
-### Phase 5: Optimization & Publishing
+### Phase 6: Optimization & Publishing
 
 **Pre-publish Checklist:**
 
 - [ ] Grammar/spelling check
 - [ ] Readability score (aim for 8th grade)
 - [ ] Semantic coverage: Related subtopics naturally included
-- [ ] Featured snippet optimization: Answer in first paragraph (40-60 words), use definition-style formatting
+- [ ] Featured snippet optimization: Answer in first paragraph (40-60 words)
 - [ ] Social sharing: Open Graph tags, Twitter cards
 - [ ] E-E-A-T check: Author bio, citations, unique expertise demonstrated
+- [ ] GEO check: Direct answers, stats, FAQ schema verified
 
 **Post-publish:**
 
 - Share on social media
 - Build internal links from existing content
 - Monitor rankings after 2-4 weeks
+- Check AI citation presence (manual ChatGPT/Perplexity audit)
 - Update based on performance data
 
-## Content Refresh Strategy
+### Phase 7: Monitor & Refresh
 
-When to refresh:
-- Dropped 5+ positions in rankings
-- Outdated information (older than 1 year)
+**Tracking for SEO:**
+- Rank positions in Google Search Console
+- Organic traffic in analytics
+- CTR from search results
+- Engagement metrics (time on page, bounce rate)
+
+**Tracking for GEO (manual):**
+- Search query in ChatGPT with web browsing
+- Search query in Perplexity
+- Note if your content is cited
+- Note which content format is being cited
+
+**When to refresh:**
+- Dropped 5+ positions in Google rankings
+- AI citation lost to competitor
+- Outdated statistics or information
 - Competitors published better content
-- Traffic declining month-over-month
-
-Refresh process:
-1. Re-analyze SERP for new competitors
-2. Update statistics and examples
-3. Add new sections based on content gaps
-4. Improve internal linking
-5. **Only update publish date if significant changes made** (Google penalizes date-only updates)
-6. Resubmit to Google Search Console (manual user step)
 
 ## GEO: Generative Engine Optimization
 
@@ -218,8 +321,6 @@ GEO optimizes content to be **cited** in AI-generated answers — ChatGPT, Perpl
 | **Traffic model** | Click-through to your site | Zero-click brand exposure |
 
 ### GEO Optimization Techniques
-
-Apply these in addition to standard SEO:
 
 #### 1. Authoritative Citations
 - **Name authoritative sources** — AI models favor content that cites credible sources
@@ -268,49 +369,6 @@ Apply these in addition to standard SEO:
 - Citation list at bottom of article
 - Links to original research/data
 
-### GEO Content Checklist
-
-Add to your standard SEO checklist:
-
-- [ ] Answer the main question in the first 50-100 words (directly, no preamble)
-- [ ] Include 3+ statistical data points with source attribution
-- [ ] Add FAQ section with schema markup (5+ questions)
-- [ ] Include comparison table with specific numbers
-- [ ] Cite authoritative sources (industry reports, research papers, recognized brands)
-- [ ] Add author bio with credentials
-- [ ] Include publication date prominently
-- [ ] Use clear H2/H3 structure with question-style headers
-- [ ] Add "How to verify" or "What the data shows" sections
-- [ ] Reference your own brand in context of expertise (when legitimate)
-
-### Testing GEO Performance
-
-Manual audit:
-1. Search your target keyword in ChatGPT (with web browsing) and Perplexity
-2. Check if your content or competitors are cited
-3. Note which content format (table, bullet, paragraph) is being cited
-4. Look for gaps where your content could provide better answers
-
-**Note:** There's no Google Search Console for GEO — citation tracking requires manual checking or third-party tools.
-
-### GEO Content Format
-
-When drafting, signal GEO intent:
-
-```
-Article: [Title]
-Target keyword: [keyword]
-SEO goal: [traditional ranking target]
-GEO goal: [be cited for question: "what is X?" / "how to X?" / "best X for Y"]
-
-Include for GEO:
-- Opening: Direct answer (40-60 words)
-- Statistics: [3+ data points with sources]
-- FAQ: [5+ questions from PAA]
-- Comparison table: [with specific metrics]
-- Author credentials: [relevant experience]
-```
-
 ### Multi-Platform GEO
 
 Different AI platforms cite different sources:
@@ -324,54 +382,12 @@ Different AI platforms cite different sources:
 
 **Strategy:** Create platform-agnostic content that satisfies all — good structure, authoritative sources, and direct answers work everywhere.
 
----
-
-## Technical SEO Basics
-
-**Core Web Vitals:**
-- **LCP (Largest Contentful Paint):** < 2.5 seconds
-- **INP (Interaction to Next Paint):** < 200 milliseconds
-- **CLS (Cumulative Layout Shift):** < 0.1
-
-**Crawl & Index:**
-- XML sitemap submitted to Google Search Console
-- Robots.txt configured properly
-- Canonical URLs set for duplicate content
-- Noindex on thin/duplicate pages
-
-**Structured Data:**
-- Article schema for blog posts
-- FAQ schema for FAQ sections
-- HowTo schema for tutorials
-- Organization schema for SMF Works
-
-## Link Building Guidance
-
-**Internal Linking:**
-- Link to 2-5 relevant existing SMF Works articles
-- Use descriptive anchor text (not "click here")
-- Prioritize high-authority pages
-
-**External Link Building (Manual/User-driven):**
-- Guest posting on industry blogs
-- Digital PR (original research, data studies)
-- Broken link building
-
 ## Content Clustering & Topic Authority
 
 Build topical authority with pillar + cluster content:
 
 **Pillar Page:** Comprehensive guide (3,000+ words) covering broad topic
 **Cluster Content:** 5-10 focused articles (1,000-2,000 words) on subtopics
-
-**Example for SMF Works:**
-- **Pillar:** "The Complete Guide to AI Automation for Small Business"
-- **Cluster:**
-  - "Best AI Email Automation Tools"
-  - "How to Automate Lead Scoring"
-  - "n8n vs Zapier: Which is Better?"
-  - "AI Customer Service: Setup Guide"
-  - "10 Workflow Automations to Save 10 Hours/Week"
 
 **Internal Linking Architecture:**
 - All cluster posts link TO the pillar
@@ -391,16 +407,13 @@ Build topical authority with pillar + cluster content:
 5. Identify: What topics do they cover that you don't? What angles are they missing?
 6. Output: Gap analysis report with priority content opportunities
 
-**Example Output:**
-"Competitor X ranks for 'AI automation examples' with a 2,000-word guide. We have no equivalent. Recommended: Create '50 AI Automation Examples for Small Business' (2,500 words, includes industry-specific breakdowns)."
-
 ## When to Spawn Subagents
 
 Use `sessions_spawn` for:
 
 1. **Long-form drafting** (>1,500 words)
-   - Spawn writing model (e.g., ollama/kimi-k2.5:cloud) with full content brief
-   - Include: target keyword, outline, SMF brand voice, internal links
+   - Spawn writing model with full content brief
+   - Include: target keyword, outline, brand voice from config, internal links
    - Wait for completion, review, then publish
 
 2. **Multi-article content calendars**
@@ -411,41 +424,42 @@ Use `sessions_spawn` for:
    - Spawn subagent to analyze top 10 results for 5 target keywords
    - Parallel processing saves time
 
-4. **Content refresh batching**
-   - Spawn subagent to audit 10 existing posts
-   - Output: Refresh priority list with specific recommendations
+4. **GEO audit for multiple keywords**
+   - Spawn subagent to test keyword in ChatGPT/Perplexity and report citation gaps
 
 **Do NOT spawn for:**
 - Single paragraph responses
 - Simple web searches
 - Tasks requiring immediate back-and-forth
-- Resource page outreach
 
 ## Success Metrics
 
+**SEO Metrics:**
 - **Rankings:** Target top 10 for primary keyword within 8 weeks
 - **Traffic:** Minimum 100 organic sessions/month per article after 3 months
 - **CTR:** Above 3% average from search results
 - **Engagement:** Average time on page > 2 minutes
-- **Conversions:** At least 1 conversion action per 500 sessions
+
+**GEO Metrics:**
+- **Citations:** Appear in ChatGPT/Perplexity responses for target queries
+- **Brand mentions:** Get named as source in AI answers
+- **Authority signals:** Author bio clicks, source link clicks from AI responses
 
 ## Tools Integration
 
 This skill works with:
 - `web_search` — for keyword and competitor research
-- `web_fetch` — for SERP analysis
+- `web_fetch` — for SERP analysis and competitor content
 - `summarize` — for competitor content analysis
-- `sessions_spawn` — for drafting with writing models (use for long-form content generation)
+- `sessions_spawn` — for drafting with writing models
 
-## AI Content Considerations
+## Config File
 
-With Google's stance on AI-generated content:
-- Always have human review before publishing
-- Add unique expertise, personal anecdotes, original research
-- Avoid generic AI patterns (overly formal tone, repetitive structure)
-- Ensure content demonstrates E-E-A-T
-- Use AI as a starting point, not the final product
+Configuration is stored at: `~/.smf/skills/smf-seo-gee/config.json`
+
+**To reconfigure:** Run `python3 ~/.smf/skills/smf-seo-gee/scripts/config_manager.py reset`
 
 ---
 
-*SMF Works SEO Content Engine — Optimized for OpenClaw*
+*SMF Works SEO+GEO Content Engine — Optimized for OpenClaw*
+*Part of SMF Works Skills Library — github.com/smfworks/smfworks-skills*

@@ -1,0 +1,30 @@
+{
+  "_schema_version": 1,
+  "_setup_completed": false,
+  "_setup_version": "1.0",
+  "_created_at": null,
+  
+  "organization": {
+    "domain": null,
+    "name": null,
+    "primary_services": null,
+    "content_pillars": null,
+    "target_audience": null,
+    "audience_pain_points": null,
+    "key_competitors": null,
+    "existing_high_performing_content": null
+  },
+  
+  "brand": {
+    "voice": null,
+    "cta_style": null,
+    "author_name": null,
+    "author_credentials": null
+  },
+  
+  "preferences": {
+    "default_word_count": 2000,
+    "default_tone": "professional but approachable",
+    "primary_platform": "google"
+  }
+}
