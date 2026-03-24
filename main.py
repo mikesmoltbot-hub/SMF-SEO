@@ -4,13 +4,14 @@ SMF SEO+GEO — Content Optimization Engine
 Main entry point for smfw CLI integration.
 
 Usage:
-    python3 main.py                    # Run setup wizard
+    python3 main.py                    # Check status / guide user
     python3 main.py configure          # Run setup wizard
     python3 main.py reconfigure        # Reset and run setup wizard
     python3 main.py status             # Check configuration status
     python3 main.py get <key>         # Get config value
-    python3 main.py update <key> <val> # Update config value
-    python3 main.py quick-test         # Quick SEO keyword test
+    python3 main.py quick-test <kw>    # Quick SEO keyword test
+
+Requires: SMF Works Pro subscription (smf login)
 """
 
 import sys
@@ -18,10 +19,31 @@ import os
 import json
 from pathlib import Path
 
-# Add scripts directory to path for imports
-SCRIPT_DIR = Path(__file__).parent / "scripts"
-if SCRIPT_DIR.exists():
+# Add bundled auth as fallback (for standalone install)
+SCRIPT_DIR = Path(__file__).parent
+bundled_auth = SCRIPT_DIR / "shared_auth.py"
+if bundled_auth.exists():
     sys.path.insert(0, str(SCRIPT_DIR))
+    try:
+        from shared_auth import require_subscription, show_subscription_error
+        HAS_AUTH = True
+    except ImportError:
+        HAS_AUTH = False
+elif shared_path.exists():
+    # Use shared auth from full repo install
+    sys.path.insert(0, str(shared_path))
+    try:
+        from smf_auth import require_subscription, show_subscription_error
+        HAS_AUTH = True
+    except ImportError:
+        HAS_AUTH = False
+else:
+    HAS_AUTH = False
+
+# Add scripts directory to path for imports
+scripts_path = SCRIPT_DIR / "scripts"
+if scripts_path.exists():
+    sys.path.insert(0, str(scripts_path))
 
 try:
     from config_manager import (
@@ -45,9 +67,35 @@ except ImportError:
         if CONFIG_FILE.exists():
             CONFIG_FILE.unlink()
 
+# Skill configuration
+SKILL_NAME = "smf-seo-gee"
+MIN_TIER = "pro"
+
+# Commands that require subscription
+PRO_COMMANDS = {"configure", "reconfigure", "status", "get", "update", "quick-test"}
+
+
+def check_pro_subscription():
+    """Verify user has Pro subscription before allowing skill use."""
+    if not HAS_AUTH:
+        # Auth not available — allow in development/dev mode
+        print("⚠️  Warning: Auth system not available, skipping subscription check")
+        return True
+    
+    result = require_subscription(SKILL_NAME, MIN_TIER)
+    
+    if not result.get("valid"):
+        print("❌ SMF SEO+GEO — Pro Skill")
+        print("=" * 40)
+        show_subscription_error(result)
+        return False
+    
+    return True
+
+
 def run_wizard():
     """Run the setup wizard."""
-    wizard_path = SCRIPT_DIR / "setup_wizard.py"
+    wizard_path = SCRIPT_DIR / "scripts" / "setup_wizard.py"
     if wizard_path.exists():
         os.system(f"python3 {wizard_path}")
     else:
@@ -73,7 +121,6 @@ def show_status():
         print("⚠️ SEO+GEO is not configured.")
         print()
         print("Run 'smfw run smf-seo-gee configure' to set up.")
-        sys.exit(1)
 
 def quick_test(keyword):
     """Quick SEO keyword analysis."""
@@ -92,11 +139,11 @@ def main():
     if len(sys.argv) < 2:
         # No arguments — check if configured and guide user
         if is_setup_complete():
-            print("SMF SEO+GEO is configured and ready!")
+            print("SMF SEO+GEO — Pro Skill ✅")
             print()
             print("Usage:")
+            print("  smfw run smf-seo-gee status        Check configuration")
             print("  smfw run smf-seo-gee configure     Reconfigure settings")
-            print("  smfw run smf-seo-gee status      Check configuration")
             print("  smfw run smf-seo-gee quick-test <keyword>  Quick keyword test")
         else:
             print("Welcome to SMF SEO+GEO!")
@@ -105,6 +152,11 @@ def main():
         sys.exit(0)
     
     cmd = sys.argv[1].lower()
+    
+    # Check subscription for Pro commands
+    if cmd in PRO_COMMANDS:
+        if not check_pro_subscription():
+            sys.exit(1)
     
     if cmd == "configure":
         run_wizard()
@@ -133,7 +185,6 @@ def main():
         if len(sys.argv) >= 4:
             key = sys.argv[2]
             value = sys.argv[3]
-            # This is simplified — full update in config_manager
             print(f"Updating {key} = {value}")
             print("(Use the configure wizard for full setup)")
         else:
